@@ -1,0 +1,43 @@
+{{- $wave := default "true" .Values.configmap.autorestart_associated_deployments -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "common.fullname" . }}
+  labels:
+    {{- include "common.labels" . | nindent 4 }}
+  annotations:
+    {{- if $wave }}
+    wave.pusher.com/update-on-config-change: "true"
+    {{- end }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "common.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "common.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecret }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "common.fullname" . }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: {{ .Values.images.repository }}:{{ .Values.images.tag }}
+          imagePullPolicy: {{ default "Always" .Values.images.pullPolicy }}
+          ports:
+            {{- range .Values.service.ports }}
+            - name: {{ .name }}
+              containerPort: {{ default .port .targetPort }}
+              protocol: {{ default "TCP" .protocol }}
+            {{- end }}
+          envFrom:
+            {{- range .Values.configmap.configmaps }}
+            - configMapRef:
+                name: {{ . }}
+              {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
