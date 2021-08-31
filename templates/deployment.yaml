@@ -19,9 +19,9 @@ spec:
       labels:
         {{- include "common.selectorLabels" . | nindent 8 }}
     spec:
-      {{- with .Values.imagePullSecret }}
       imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
+      {{- range .Values.images.PullSecrets }}
+        - name: {{ . }}
       {{- end }}
       serviceAccountName: {{ include "common.fullname" . }}
       containers:
