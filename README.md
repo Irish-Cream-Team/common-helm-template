@@ -70,7 +70,7 @@
 > >   type: NodePort
 > > ```
 > >
-> > ==service.type value is not required, and will default to "ClusterIP".==
+> > <mark>service.type value is not required, and will default to "ClusterIP".</mark>
 >
 > #### <u>ports</u>
 >
