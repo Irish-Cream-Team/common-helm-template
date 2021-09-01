@@ -74,7 +74,7 @@
 >
 > #### <u>ports</u>
 >
-> > #### _recives an array of values for each port, the values are;_
+> > #### _recives a map of values for each port, the values are;_
 > >
 > > | key        | description                                          | Type           | additional chars | is required                    | note                                                  |
 > > | ---------- | ---------------------------------------------------- | -------------- | ---------------- | ------------------------------ | ----------------------------------------------------- |
@@ -121,7 +121,42 @@
 > >   autorestart_associated_deployments: false
 > > ```
 > >
-> > <mark>configmap.autorestart_associated_deployments value is not required, and will default to "true".</mark>
+> > <mark>configmap.autorestart\*associated_deployments value is not required, and will default to "true".</mark>
+
+### **ingress**
+
+> #### <u>hosts</u>
+>
+> > #### _for each hostname your service uses, a map of two values should be filled: **host** and **paths**:_
+> >
+> > ##### <u>host</u>
+> >
+> > > ##### _your domain name._
+> >
+> > ##### <u>paths</u>
+> >
+> > > ##### _recives a map of values for each path, the values are;_
+> > >
+> > > | key  | description                           | Type    | additional chars | is required | note |
+> > > | ---- | ------------------------------------- | ------- | ---------------- | ----------- | ---- |
+> > > | path | name of your path                     | string  | None             | yes         | None |
+> > > | port | value of port to be exposed to ingres | integer | None             | yes         | None |
+> >
+> > #### _For example;_
+> >
+> > ```yaml
+> > ingress:
+> >   hosts:
+> >     - host: my-example.domain.com
+> >       paths:
+> >         - path: /my/route
+> >           port: 80
+> >
+> >     - host: my-second.domain.com
+> >       paths:
+> >         - path: /my/second_route
+> >           port: 3000
+> > ```
 
 <!-- <br></br>
 
