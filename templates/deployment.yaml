@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "common.fullname" . }}
+  name: {{ .Values.name }}
   labels:
     {{- include "common.labels" . | nindent 4 }}
   annotations:
@@ -23,7 +23,7 @@ spec:
       {{- range .Values.images.PullSecrets }}
         - name: {{ . }}
       {{- end }}
-      serviceAccountName: {{ include "common.fullname" . }}
+      serviceAccountName: {{ .Values.name }}
       containers:
         - name: {{ .Chart.Name }}
           image: {{ .Values.images.repository }}:{{ .Values.images.tag }}
