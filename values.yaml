@@ -1,79 +1,13 @@
-#Enter your microsevice's name here.
-
 name: "no-name-received"
-# If you want to overide the full name you can include the 'fullnameOverride' value
-#fullname:
 replicaCount: 1
 
 images:
-  ##########################################################
-  #.pullPolicy value is not required,
-  #Default value is 'Always',
-  #Supported values are "Always", "IfNotPresent" and "Never"
-  ##########################################################
-  #pullPolicy: Always
-  PullSecrets: [test, test2]
+  PullSecrets: []
   repository: nginx
   tag: "latest"
 
 service:
-  #################################################################################
-  #.type value is not required,
-  #Default value is "ClusterIP",
-  #supported values are "ClusterIP", "ExternalName", "LoadBalancer" and "NodePort".
-  #################################################################################
-  #type: ClusterIP
   ports:
-    - name: http
-      port: 80
-      #############################################################
-      #.protocol value is not required, its default value is "TCP".
-      #Supported values are "TCP","SCTP" and "UDP"
-      #############################################################
-      protocol: TCP
-    - name: ssh
-      port: 443
-      #######################################################################
-      #.targetPort value is not required, its default value is '.port's value.
-      #######################################################################
-      targetPort: "5555"
 
 configmap:
-  configmaps: [test]
-  ##################################################################################
-  #This option (autorestart_associated_deployments) uses the 'wave' project for k8s,
-  #it adds an annotation named 'wave.pusher.com/update-on-config-change,
-  #and sets it to "true".
-  #for further information please refer to https://github.com/wave-k8s/wave
-  ##################################################################################
-  #  autorestart_associated_deployments: true
-#####################################################################
-# If you want to add annotation to your serviceAccount,
-#please uncomment the following 2 lines and add the dsired annotation.
-#####################################################################
-# serviceAccount:
-#   annotations: {}
-
-####################################################################################
-#Ingress funcionallity is disabled bydefault,
-#to enable it, please uncomment the ingress block and fill it with your information.
-####################################################################################
-
-# ingress:
-#   enabled: true
-#   hosts:
-#   - host: chart-example.local
-#     paths:
-#       - path: /test
-#         service: service1
-#         port: 80
-####################################################################
-#If you want to add tls verification to your ingress,
-#please uncomment the following 4 lines and enter appropriate values
-####################################################################
-#  tls:
-#    - hosts:
-#      - examplehostname.com
-#      secretName: tls-secret-example
-
-#resources: {}
+  configmaps: []
