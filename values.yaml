@@ -6,8 +6,8 @@ images:
   repository: nginx
   tag: "latest"
 
-service:
-  ports:
+#service:
+#  ports:
 
 configmap:
   configmaps: []
