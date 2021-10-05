@@ -47,6 +47,11 @@ configmap:
   #for further information please refer to https://github.com/wave-k8s/wave
   ##################################################################################
   #  autorestart_associated_deployments: true
+  env:
+    - name: DEMO_ENV
+      value: "hi there"
+    - name: DEMO_ENV_2
+      value: "hi again"
 #####################################################################
 # If you want to add annotation to your serviceAccount,
 #please uncomment the following 2 lines and add the dsired annotation.
