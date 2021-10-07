@@ -36,6 +36,17 @@ spec:
               protocol: {{ default "TCP" .protocol }}
             {{- end }}
             {{ end }}
+          {{ if .Values.volume }}
+          volumeMounts:
+          - name: azure
+            mountPath: {{ .mountPath }}
+        volumes:
+        - name: azure
+          azureFile:
+            secretName: {{ .secretName }} azure-secret #SERCRET-NAME
+            shareName: {{ .fileShareName }} #FILE-SHARE-NAME-WITH-PATH-IN-IT
+            readOnly: false
+
           envFrom:
             {{- range .Values.config.configmaps }}
             - configMapRef:
