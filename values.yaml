@@ -1,13 +1,18 @@
-name: "no-name-received"
+name: "test"
 replicaCount: 1
 
 images:
-  PullSecrets: []
+  PullSecrets:
+    name: momentumacr
   repository: nginx
   tag: "latest"
 
-#service:
-#  ports:
+service:
+
+volume:
+  mountPath: /dist/
+  secretName: azure-secret
+  shareName: momentum/utils
 
 config:
   configmaps: []
