@@ -52,12 +52,31 @@ spec:
           {{- toYaml .Values.resources | nindent 12 }}
       {{ if .Values.volume }}
         volumeMounts:
-        - name: azure
-          mountPath: {{ .Values.volume.mountPath }}
+        {{- range .Values.volume }}
+        - name: {{ .name }}
+          mountPath: {{ .mountPath }}
+          {{ if .subPath }}
+          subPath: {{ .subPath }}
+          {{ end }}
       volumes:
-      - name: azure
+      - name: {{  .name }}
+
+        {{ if eq .type "azurefile" }}
         azureFile:
-          secretName: {{ .Values.volume.secretName }} #azure-secret #SERCRET-NAME
-          shareName: {{ .Values.volume.shareName }} #FILE-SHARE-NAME-WITH-PATH-IN-IT
+          secretName: {{ .secretName }} 
+          shareName: {{ .shareName }} 
           readOnly: false
+        {{ end }}
+
+        {{ if eq .type "volumeClaim" }}
+        persistentVolumeClaim:
+          claimName: {{ .claimName}}
+        {{ end }}
+
+        {{ if eq .type "configMap" }}
+        configMap: 
+          name: {{.configMapsName}}
+        {{ end }}
+
+        {{- end }}
       {{ end }}

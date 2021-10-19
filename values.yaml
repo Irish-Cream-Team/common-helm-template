@@ -10,9 +10,17 @@ images:
 service:
 
 volume:
-  mountPath: /dist/
-  secretName: azure-secret
-  shareName: momentum/utils
+  - name: azure
+    mountPath: /dist/
+    subPath: ofek
+  #   secretName: azure-secret
+  #   shareName: momentum/utils
+    type: configMap
+    configMapsName: ofek
 
 config:
   configmaps: []
+
+
+
+
