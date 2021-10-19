@@ -1,26 +1,14 @@
-name: "test"
+name: "no-name-received"
 replicaCount: 1
 
 images:
-  PullSecrets:
-    name: momentumacr
+  PullSecrets: []
   repository: nginx
   tag: "latest"
 
-service:
-
-volume:
-  - name: azure
-    mountPath: /dist/
-    subPath: ofek
-  #   secretName: azure-secret
-  #   shareName: momentum/utils
-    type: configMap
-    configMapsName: ofek
+#service:
+#  ports:
 
 config:
   configmaps: []
-
-
-
 

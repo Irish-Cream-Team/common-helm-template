@@ -67,7 +67,7 @@ spec:
           shareName: {{ .shareName }} 
           readOnly: false
         {{ end }}
-
+        
         {{ if eq .type "volumeClaim" }}
         persistentVolumeClaim:
           claimName: {{ .claimName}}

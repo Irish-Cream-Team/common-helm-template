@@ -62,6 +62,22 @@ configmap:
 # serviceAccount:
 #   annotations: {}
 
+
+#####################################################################
+# If you want to add volume,
+#please uncomment the following lines and add the dsired annotation.
+#####################################################################
+# volume:
+#   - name: azure
+#     mountPath: /dist/
+#     subPath: test
+#   #   secretName: azure-secret
+#   #   shareName: momentum/utils
+#     type: configMap
+#     configMapsName: test
+
+
+
 ####################################################################################
 #Ingress funcionallity is disabled bydefault,
 #to enable it, please uncomment the ingress block and fill it with your information.
