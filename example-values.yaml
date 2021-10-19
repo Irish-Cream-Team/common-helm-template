@@ -17,6 +17,9 @@ images:
   tag: "latest"
 
 service:
+  ports:
+  - name: http
+    port: "3000"
   #################################################################################
   #.type value is not required,
   #Default value is "ClusterIP",
