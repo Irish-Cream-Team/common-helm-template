@@ -17,6 +17,9 @@ images:
   tag: "latest"
 
 service:
+  ports:
+  - name: http
+    port: "3000"
   #################################################################################
   #.type value is not required,
   #Default value is "ClusterIP",
@@ -58,6 +61,22 @@ configmap:
 #####################################################################
 # serviceAccount:
 #   annotations: {}
+
+
+#####################################################################
+# If you want to add volume,
+#please uncomment the following lines and add the dsired annotation.
+#####################################################################
+# volume:
+#   - name: azure
+#     mountPath: /dist/
+#     subPath: test
+#   #   secretName: azure-secret
+#   #   shareName: momentum/utils
+#     type: configMap
+#     configMapsName: test
+
+
 
 ####################################################################################
 #Ingress funcionallity is disabled bydefault,

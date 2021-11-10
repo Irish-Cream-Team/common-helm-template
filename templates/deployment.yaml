@@ -25,28 +25,58 @@ spec:
       {{- end }}
       serviceAccountName: {{ .Values.name }}
       containers:
-        - name: {{ .Chart.Name }}
-          image: {{ .Values.images.repository }}:{{ .Values.images.tag }}
-          imagePullPolicy: {{ default "Always" .Values.images.pullPolicy }}
-          {{ if .Values.service -}}
-          ports:
-            {{- range .Values.service.ports }}
-            - name: {{ .name }}
-              containerPort: {{ default .port .targetPort }}
-              protocol: {{ default "TCP" .protocol }}
-            {{- end }}
-            {{ end }}
-          envFrom:
-            {{- range .Values.config.configmaps }}
-            - configMapRef:
-                name: {{ . }}
-              {{- end }}
-          {{ if .Values.config.env }}
-          env:
-            {{- range .Values.config.env }}
-            - name: {{ .name }}
-              value: {{ .value }}
-            {{- end }}
+      - name: {{ .Chart.Name }}
+        image: {{ .Values.images.repository }}:{{ .Values.images.tag }}
+        imagePullPolicy: {{ default "Always" .Values.images.pullPolicy }}
+        {{ if .Values.service -}}
+        ports:
+          {{- range .Values.service.ports }}
+          - name: {{ .name }}
+            containerPort: {{ default .port .targetPort }}
+            protocol: {{ default "TCP" .protocol }}
+          {{- end }}
           {{ end }}
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+        envFrom:
+          {{- range .Values.config.configmaps }}
+          - configMapRef:
+              name: {{ . }}
+            {{- end }}
+        {{ if .Values.config.env }}
+        env:
+          {{- range .Values.config.env }}
+          - name: {{ .name }}
+            value: {{ .value }}
+          {{- end }}
+        {{ end }}
+        resources:
+          {{- toYaml .Values.resources | nindent 12 }}
+      {{ if .Values.volume }}
+        volumeMounts:
+        {{- range .Values.volume }}
+        - name: {{ .name }}
+          mountPath: {{ .mountPath }}
+          {{ if .subPath }}
+          subPath: {{ .subPath }}
+          {{ end }}
+      volumes:
+      - name: {{  .name }}
+
+        {{ if eq .type "azurefile" }}
+        azureFile:
+          secretName: {{ .secretName }} 
+          shareName: {{ .shareName }} 
+          readOnly: false
+        {{ end }}
+        
+        {{ if eq .type "volumeClaim" }}
+        persistentVolumeClaim:
+          claimName: {{ .claimName}}
+        {{ end }}
+
+        {{ if eq .type "configMap" }}
+        configMap: 
+          name: {{.configMapsName}}
+        {{ end }}
+
+        {{- end }}
+      {{ end }}
