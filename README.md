@@ -97,7 +97,61 @@
 > >        targetPort: 8443
 > > ```
 
-<br></br>
+### **volume**
+
+> _recieves a list of volume confugurations:_
+>
+> > #### <u>name</u>
+> >
+> > _string, name of the volume_
+> >
+> > #### <u>type</u>
+> >
+> > _string, the type of volumeMount, could be azurefile, volumeClaim or configMap_
+> >
+> > #### <u>secretName(type = azurefile)</u>
+> >
+> > > name of your azure secret, string
+> >
+> > #### <u>shareName(type = azurefile)</u>
+> >
+> > > name of your azure share, string
+> >
+> > #### <u>claimName(type = volumeClaim)</u>
+> >
+> > > name of your volume claim, string
+> >
+> > #### <u>configMapsName(type = configMap)</u>
+> >
+> > > name of your configmap, string
+> >
+> > #### <u>mounts</u>
+> >
+> > > recives an array of mountpoint and optional subpaths;
+> >
+> > ##### <u>mountPath</u>
+> >
+> > > path to mount your volume, string.
+> >
+> > ##### <u>subPath</u>
+> >
+> > > subPath in volume, string, optional
+> >
+> > example:
+> >
+> > ```yaml
+> > volume:
+> >   - name: test-name
+> >     type: volumeClaim
+> >     claimName: test-claim
+> >     mounts:
+> >       - mountPath: /my/mount/myfirstfile.txt
+> >          subPath: dirinsidemyvolume/myfirstfile.txt
+> >       - mountPath: /my/mount/mysecondfile.txt
+> >         subPath: dirinsidemyvolume/mysecondfile.txt
+> > ```
+> >
+> > <br></br>
 
 ### **configmap**
 
@@ -167,3 +221,7 @@
 | images.PullSecrets | array          | None             | None                                       |
 | images.repository  | string         | None             | None                                       |
 | images.tag         | string         | None             | None                                       | -->
+
+```
+
+```
