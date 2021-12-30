@@ -53,10 +53,13 @@ spec:
       {{ if .Values.volume }}
         volumeMounts:
         {{- range .Values.volume }}
-        - name: {{ .name }}
-          mountPath: {{ .mountPath }}
+        {{- $volname := .name -}}
+        {{- range .mounts }}
+        - mountPath: {{ .mountPath }}
+          name: {{ $volname }}
           {{ if .subPath }}
           subPath: {{ .subPath }}
+          {{- end }}
           {{ end }}
       volumes:
       - name: {{  .name }}

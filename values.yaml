@@ -9,6 +9,16 @@ images:
 #service:
 #  ports:
 
+# volume:
+#   - name: test-name
+#     type: volumeClaim
+#     claimName: test-claim
+#     mounts:
+#       - mountPath: test1
+#         subPath: test1
+#       - mountPath: test2
+#         subPath: test2
+
 config:
   configmaps: []
 
