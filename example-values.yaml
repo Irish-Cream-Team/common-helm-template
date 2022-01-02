@@ -18,15 +18,14 @@ images:
 
 service:
   ports:
-  - name: http
-    port: "3000"
+    - name: http
+      port: "3000"
   #################################################################################
   #.type value is not required,
   #Default value is "ClusterIP",
   #supported values are "ClusterIP", "ExternalName", "LoadBalancer" and "NodePort".
   #################################################################################
   #type: ClusterIP
-  ports:
     - name: http
       port: 80
       #############################################################
