@@ -1,6 +1,6 @@
 apiVersion: v2
 appVersion: 1.16.0
-description: A Generic Helm chart for deploying microservices individually
+description: A Generic Helm chart for deploying microservice individually
 name: common
 type: application
-version: 0.6.0
+version: 0.7.0
