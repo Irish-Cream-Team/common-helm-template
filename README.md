@@ -176,6 +176,18 @@
 > > ```
 > >
 > > <mark>configmap.autorestart\*associated_deployments value is not required, and will default to "true".</mark>
+> > > #### <u>configmaps</u>
+>
+> > #### _recives environment variable for your deployment, for example;_
+> >
+> > ```yaml
+> > config:
+> >   configmaps: []
+> >   env:
+> >   - name: value-name
+> >     value: example-value
+> > ```
+>
 
 ### **ingress**
 
