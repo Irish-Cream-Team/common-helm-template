@@ -40,7 +40,7 @@ service:
       #######################################################################
       targetPort: "5555"
 
-configmap:
+config:
   configmaps: [test]
   ##################################################################################
   #This option (autorestart_associated_deployments) uses the 'wave' project for k8s,
