@@ -160,7 +160,7 @@
 > > #### _recives an array of the configmap names your service uses, for example;_
 > >
 > > ```yaml
-> > configmap:
+> > config:
 > >   configmaps: [first-configmap, second-configmap]
 > > ```
 >
