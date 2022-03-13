@@ -176,7 +176,7 @@
 > > ```
 > >
 > > <mark>configmap.autorestart\*associated_deployments value is not required, and will default to "true".</mark>
-> > > #### <u>configmaps</u>
+> >  #### <u>environment variable</u>
 >
 > > #### _recives environment variable for your deployment, for example;_
 > >
