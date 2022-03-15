@@ -1,8 +1,3 @@
-{{- define "returnJson" }}
-  {{- $result := dict "key1" (dict "nestedKey1" "nestedVal1") }}
-  {{- $result | toJson }}
-{{- end }}
-
 {{- $wave := default "true" .Values.config.autorestart_associated_deployments -}}
 apiVersion: apps/v1
 kind: Deployment
