@@ -44,8 +44,8 @@ spec:
         {{ if .Values.config.env }}
         env:
           {{- range .Values.config.env }}
-          - name: {{ .name }}
-            value: {{ .value }}
+          - name: {{ .name  }}
+            value: {{ deepCopy  .value | quote }}
           {{- end }}
         {{ end }}
         resources:
