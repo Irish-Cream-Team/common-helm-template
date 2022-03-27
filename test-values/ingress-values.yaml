@@ -12,10 +12,11 @@ service:
     port: "8080"
 
 ingress:
-  enabled: true
-  hosts:
-  - host: /chart-example.local
-    paths:
-      - path: /test
-        service: service1
-        port: 80
+   enabled: true
+   hosts:
+   - host: chart-example.local
+     paths:
+       - path: /test
+         service: service1
+         port: 80
+
