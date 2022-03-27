@@ -1,0 +1,10 @@
+name: "configmap-test"
+replicaCount: 1
+
+images:
+  PullSecrets: []
+  repository: nginx
+  tag: "latest"
+
+config:
+  configmaps: [first-configmap, second-configmap]

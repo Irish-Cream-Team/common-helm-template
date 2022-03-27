@@ -160,7 +160,7 @@
 > > #### _recives an array of the configmap names your service uses, for example;_
 > >
 > > ```yaml
-> > config:
+> > configmap:
 > >   configmaps: [first-configmap, second-configmap]
 > > ```
 >
@@ -176,18 +176,6 @@
 > > ```
 > >
 > > <mark>configmap.autorestart\*associated_deployments value is not required, and will default to "true".</mark>
-> #### <u>environment variable</u>
->
-> > #### _recives environment variable for your deployment, for example;_
-> >
-> > ```yaml
-> > config:
-> >   configmaps: []
-> >   env:
-> >   - name: value-name
-> >     value: example-value
-> > ```
->
 
 ### **ingress**
 

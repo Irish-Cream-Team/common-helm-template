@@ -1,0 +1,19 @@
+name: "volume-test"
+replicaCount: 1
+
+images:
+  PullSecrets: []
+  repository: nginx
+  tag: "latest"
+
+volume:
+  - name: test-name
+    type: volumeClaim
+    claimName: test-claim
+    mounts:
+      - mountPath: my/shit/t.txt
+        subPath: shit/path/t.txt
+
+config:
+  configmaps: []
+

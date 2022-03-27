@@ -44,8 +44,8 @@ spec:
         {{ if .Values.config.env }}
         env:
           {{- range .Values.config.env }}
-          - name: {{ .name  }}
-            value: {{ deepCopy  .value | quote }}
+          - name: {{ .name }}
+            value: {{ .value }}
           {{- end }}
         {{ end }}
         resources:
@@ -69,9 +69,7 @@ spec:
           subPath: {{ .subPath }}
           {{- end }}
           {{ end }}
-          {{ end }}
       volumes:
-    {{- range .Values.volume }}
       - name: {{  .name }}
 
         {{ if eq .type "azurefile" }}

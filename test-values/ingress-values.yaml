@@ -1,0 +1,21 @@
+name: "ingress-test"
+replicaCount: 1
+
+images:
+  PullSecrets: []
+  repository: nginx
+  tag: "latest"
+
+service:
+  ports:
+  - name: http
+    port: "8080"
+
+ingress:
+  enabled: true
+  hosts:
+  - host: /chart-example.local
+    paths:
+      - path: /test
+        service: service1
+        port: 80
