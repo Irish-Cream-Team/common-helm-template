@@ -20,3 +20,5 @@ ingress:
          service: service1
          port: 80
 
+config:
+  configmaps: []
