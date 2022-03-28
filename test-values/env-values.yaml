@@ -19,6 +19,6 @@ config:
     #     name: admin,
     #     age: true 
     #   }"
-    - name: 'bool'
+    - name: bool
       value: True
 
