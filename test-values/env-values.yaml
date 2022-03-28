@@ -14,10 +14,10 @@ config:
     - name: DEMO_ENV_2
       value: "hi again"
 
-    # - name: "json"
-    #   value: "{
-    #     name: admin,
-    #     age: true 
-    #   }"
+    - name: "json"
+      value: "{
+        name: admin,
+        age: true 
+      }"
 
 
