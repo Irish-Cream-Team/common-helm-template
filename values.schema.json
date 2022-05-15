@@ -1,0 +1,190 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "type": "object",
+    "required": [
+        "name",
+        "replicaCount",
+        "images"
+    ],
+    "properties": {
+        "name": {
+            "type": "string",
+            "pattern": "[a-z0-9]([-a-z0-9]*[a-z0-9])?"
+        },
+        "replicaCount": {
+            "type": "integer"
+        },
+        "serviceAccount": {
+            "type": "object",
+            "properties": {
+                "annotations": {
+                    "type": "object"
+                }
+            }
+        },
+        "livenessProbe": {
+            "type": "object"
+        },
+        "readinessProbe": {
+            "type": "object"
+        },
+        "images": {
+            "type": "object",
+            "required": [
+                "repository"
+            ],
+            "properties": {
+                "repository": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9-_/]+$"
+                },
+                "tag": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9-_]+$"
+                },
+                "PullSecrets": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9-_]+$"
+                    }
+                },
+                "pullPolicy": {
+                    "type": "string",
+                    "enum": [
+                        "Always",
+                        "Never",
+                        "IfNotPresent"
+                    ]
+                }
+            },
+            "dependentRequired": {
+                "yay": {
+                    "tag": {
+                        "const": "latest"
+                    }
+                }
+            }
+        },
+        "service": {
+            "type": "object",
+            "required": [
+                "ports"
+            ],
+            "properties": {
+                "ports": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "name",
+                            "port"
+                        ],
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "pattern": "[a-z0-9]([-a-z0-9]*[a-z0-9])?"
+                            },
+                            "port": {
+                                "type": "integer"
+                            },
+                            "type": {
+                                "type": "string",
+                                "enum": [
+                                    "ClusterIP",
+                                    "ExternalName",
+                                    "LoadBalancer",
+                                    "NodePort"
+                                ]
+                            },
+                            "protocol": {
+                                "type": "string",
+                                "enum": [
+                                    "TCP",
+                                    "SCTP",
+                                    "UDP"
+                                ]
+                            },
+                            "targetPort": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "config": {
+            "type": "object",
+            "required": [
+                "configmaps"
+            ],
+            "properties": {
+                "configmaps": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9-_]+$"
+                    }
+                },
+                "env": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "name",
+                            "value"
+                        ],
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "value": {}
+                        }
+                    }
+                },
+                "autorestart_associated_deployments": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "volume": {
+            "type": "object",
+            "required": [
+                "name",
+                "mounts",
+                "type"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "pattern": "[a-z0-9]([-a-z0-9]*[a-z0-9])?"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "azurefile",
+                        "volumeClaim",
+                        "configMap"
+                    ]
+                },
+                "mounts": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "mountPath"
+                        ],
+                        "properties": {
+                            "mountPath": {
+                                "type": "string"
+                            },
+                            "subPath": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
