@@ -88,11 +88,11 @@
 > > ```yaml
 > > service:
 > >    ports:
-> >        - name: http
+> >      - name: http
 > >        port: 80
 > >        protocol: TCP
 > >
-> >        - name: ssh
+> >      - name: ssh
 > >        port: 443
 > >        targetPort: 8443
 > > ```
@@ -146,7 +146,7 @@
 > >     claimName: test-claim
 > >     mounts:
 > >       - mountPath: /my/mount/myfirstfile.txt
-> >          subPath: dirinsidemyvolume/myfirstfile.txt
+> >         subPath: dirinsidemyvolume/myfirstfile.txt
 > >       - mountPath: /my/mount/mysecondfile.txt
 > >         subPath: dirinsidemyvolume/mysecondfile.txt
 > > ```
