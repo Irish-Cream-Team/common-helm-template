@@ -14,12 +14,12 @@ images:
   #pullPolicy: Always
   PullSecrets: [test, test2]
   repository: nginx
-  tag: "latest"
+  tag: latest
 
 service:
   ports:
     - name: http
-      port: "3000"
+      port: 3000
   #################################################################################
   #.type value is not required,
   #Default value is "ClusterIP",
@@ -38,7 +38,7 @@ service:
       #######################################################################
       #.targetPort value is not required, its default value is '.port's value.
       #######################################################################
-      targetPort: "5555"
+      targetPort: 5555
 
 config:
   configmaps: [test]
@@ -59,21 +59,41 @@ config:
 #please uncomment the following 2 lines and add the dsired annotation.
 #####################################################################
 # serviceAccount:
-#   annotations: {}
+#   annotations: { "annotation: true" }
 
 
 #####################################################################
 # If you want to add volume,
 #please uncomment the following lines and add the dsired annotation.
 #####################################################################
-# volume:
-#   - name: azure
-#     mountPath: /dist/
-#     subPath: test
-#   #   secretName: azure-secret
-#   #   shareName: momentum/utils
-#     type: configMap
-#     configMapsName: test
+volume:
+  ## example for type "volumeClaim"
+  - name: test-name
+    type: volumeClaim
+    claimName: test-claim
+    mounts:
+      - mountPath: /mount/in/container
+        subPath: myspecificfile.txt
+      - mountPath: /mount/in/contianer
+
+  ## example for type "configMap"
+  - name: test-name
+    type: configMap
+    configMapsName: my-config-map
+    mounts:
+      - mountPath: /mount/in/container
+        subPath: myspecificfile.txt
+      - mountPath: /mount/in/contianer
+
+  ## example for type "configMap"
+  - name: test-name
+    type: configMap
+    configMapsName: my-config-map
+    mounts:
+      - mountPath: /mount/in/container
+        subPath: myspecificfile.txt
+      - mountPath: /mount/in/contianer
+
 
 
 
@@ -82,21 +102,23 @@ config:
 #to enable it, please uncomment the ingress block and fill it with your information.
 ####################################################################################
 
-# ingress:
-#   enabled: true
-#   hosts:
-#   - host: chart-example.local
-#     paths:
-#       - path: /test
-#         service: service1
-#         port: 80
+ingress:
+  enabled: true
+  annotations: 
+    myannotation: test
+  hosts:
+  - host: examplehostname.com
+    paths:
+      - path: /test
+        service: service1
+        port: 80
 ####################################################################
 #If you want to add tls verification to your ingress,
 #please uncomment the following 4 lines and enter appropriate values
 ####################################################################
-#  tls:
-#    - hosts:
-#      - examplehostname.com
-#      secretName: tls-secret-example
+  tls:
+    - hosts:
+      - examplehostname.com
+      secretName: tls-secret-example
 
 #resources: {}
