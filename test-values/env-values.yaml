@@ -1,0 +1,24 @@
+name: "env-test"
+replicaCount: 1
+
+images:
+  PullSecrets: []
+  repository: nginx
+  tag: "latest"
+
+config:
+  configmaps: []
+  env:
+    - name: DEMO_ENV
+      value: "hi there"
+    - name: DEMO_ENV_2
+      value: "hi again"
+
+    # - name: "json"
+    #   value: "{
+    #     name: admin,
+    #     age: true 
+    #   }"
+    - name: bool
+      value: True
+
