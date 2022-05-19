@@ -104,7 +104,8 @@ volume:
 
 ingress:
   enabled: true
-  annotations: "myannotation: test"
+  annotations: 
+    myannotation: test
   hosts:
   - host: examplehostname.com
     paths:
