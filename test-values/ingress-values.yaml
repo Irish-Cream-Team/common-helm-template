@@ -13,6 +13,7 @@ service:
 
 ingress:
    enabled: true
+   name: "test-ingress"
    hosts:
    - host: chart-example.local
      paths:
