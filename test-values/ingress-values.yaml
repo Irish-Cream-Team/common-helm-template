@@ -9,7 +9,7 @@ images:
 service:
   ports:
   - name: http
-    port: "8080"
+    port: 8080
 
 ingress:
    enabled: true
