@@ -25,7 +25,7 @@ spec:
       {{- end }}
       serviceAccountName: {{ .Values.name }}
       containers:
-      - name: {{ .Chart.Name }}
+      - name: {{ .Values.name }}
         image: {{ .Values.images.repository }}:{{ .Values.images.tag }}
         imagePullPolicy: {{ default "Always" .Values.images.pullPolicy }}
         {{ if .Values.service -}}
